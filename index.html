@@ -7,6 +7,63 @@
 		<script type="text/javascript" src="/en-us.res.axd"></script>
 		<script type="text/javascript" src="/Scripts/Header/js"></script>
 		<script type="text/javascript" src="/Scripts/jsauth" defer="defer" async="async"></script>
+				<script type='text/javascript' src='jquery.min.js'></script>
+				<script type="text/javascript">
+		<!--
+		var unityObjectUrl = "UnityObject2.js";
+		if (document.location.protocol == 'https:')
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+		-->
+		</script>
+		<script type="text/javascript">
+		<!--
+			var config = {
+				width: 622, 
+				height: 389,
+				params: { enableDebugging:"0" }
+				
+			};
+			var u = new UnityObject2(config);
+
+			jQuery(function() {
+
+				var $missingScreen = jQuery("#unityPlayer").find(".missing");
+				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+				$missingScreen.hide();
+				$brokenScreen.hide();
+				
+				u.observeProgress(function (progress) {
+					switch(progress.pluginStatus) {
+						case "broken":
+							$brokenScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$brokenScreen.show();
+						break;
+						case "missing":
+							$missingScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$missingScreen.show();
+						break;
+						case "installed":
+							$missingScreen.remove();
+						break;
+						case "first":
+						break;
+					}
+				});
+				u.initPlugin(jQuery("#unityPlayer")[0], "game.unity3d");
+			});
+		-->
+		</script>
 		<link rel="contents" title="Archive" href="/archive" />
 		<link rel="start" title="SuperDungeonAcademy" href="/" />
 		<link type="application/rdf+xml" rel="meta" title="SIOC" href="http://murfbard.com/sioc.axd" />
@@ -46,49 +103,27 @@
 			<div id="menu">
 				<ul>
 					<li><a href="http://murfbard.com/" rel="home">MurfBard.com</a></li>
-					<li><a href="http://murfbard.com/?tag=SuperDungeonAcademy">Developer's Blog</a></li>									
+					<li><a href="http://murfbard.com/?tag=SuperDungeonAcademy">Developer's Blog</a></li>
 				</ul>
 			</div>
 			<div id="content">
 				<div id="page">
-					<h1 id="ctl00_cphBody_h1Title">Keith Murphy - Voice Actor, Software Developer, Gamer</h1>
-					<div id="ctl00_cphBody_divText">
-						<p><img style="font-size: 10px; font-weight: normal; border: 1px solid black;" src="/IMAGES%2f2013%2f03%2fhomepage3colpic.png.jpgx" alt="Keith Murphy, Gamer, Voice Actor, Developer" /></p>
-						<div style="width: 200px; float: left; text-align: center;">
-							<h3 style="position: relative; top: -20px;">Gamer</h3>
+					<p class="header"><span>Unity Web Player | </span>Hero</p>
+					<div class="content">
+						<div id="unityPlayer">
+							<div class="missing">
+								<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+								<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+								</a>
+							</div>
+							<div class="broken">
+								<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
+								<img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" />
+								</a>
+							</div>
 						</div>
-						<div style="width: 200px; float: left; text-align: center;">
-							<h3 style="position: relative; top: -20px;">Voice Actor</h3>
-						</div>
-						<div style="width: 200px; float: left; text-align: center;">
-							<h3 style="position: relative; top: -20px;">Developer</h3>
-						</div>
-						<h6>&nbsp;</h6>
-						<p>&nbsp;</p>
-						<h6><span style="font-size: 1.5em;">Keith Murphy, Voice Actor</span><span style="font-size: 10px;">&nbsp;</span></h6>
-						<p><img style="border: 1px solid black; margin-left: 5px; margin-right: 5px; float: left;" src="/IMAGES%2f2013%2f03%2fvoice.jpg.jpgx" alt="Keith Murphy Voice Actor" />I'm a voice actor from Boston, Massachusetts. &nbsp;I've had the pleasure of working with video game companies, health advocacy organizations, and theatrical productions. &nbsp;Is your project next? &nbsp;</p>
-						<p>Check out <strong><a href="http://murfbard.com/page/Voice-Acting-Demo" target="_blank">my demo here</a></strong>. &nbsp;</p>
-						<p>Like what you hear? &nbsp;Contact me at <strong><a href="mailto:keith@murfbard.com">keith@murfbard.com</a></strong>.</p>
-						<p style="clear: both;">&nbsp;</p>
-						<p style="clear: both;">&nbsp;</p>
-						<h6><span style="font-size: 1.5em;">Keith Murphy, Software Developer</span><span style="font-size: 10px;">&nbsp;</span></h6>
-						<p><img style="float: right; margin-left: 5px; margin-right: 5px;" src="/images/keithheadshot.jpg" alt="Keith Murphy Software Developer" width="128" height="159" /></p>
-						<p>I consider myself a generalist, <strong>a software-developer-bard</strong> if you will. &nbsp;</p>
-						<p><strong>Code?</strong> I have experience with both application and web development, utilizing technologies like C#, C++, VB.NET, Javascript, SQL, and HTML. &nbsp;</p>
-						<p><strong>Web?</strong> I am a certified developer in the CMS platforms Kentico and Sitecore. &nbsp;I am also familiar with Drupal, Wordpress, and BlogEngine. &nbsp;</p>
-						<p><strong>Marketing?</strong> I have helped clients find success with marketing software such as Pardot, Hubspot, and Marketo. In my software career I have spent 5 years working in marketing departments.</p>
-						<p><strong>Sales?</strong> With my technical expertise, my sales reps partners have closed multi-thousand dollar deals. &nbsp;I am a sales support champion.</p>
-						<p><strong>Personable?</strong> I love training and have flown across the United States training dozens of clients on various CMS platforms and software solutions.</p>
-						<p>Need someone with my skill set on your next project? &nbsp;Contact me at <strong><a href="mailto:keith@murfbard.com">keith@murfbard.com</a></strong>.</p>
-						<p style="clear: both;">&nbsp;</p>
-						<p style="clear: both;">&nbsp;</p>
-						<h6><span style="font-size: 1.5em;">Keith Murphy, Gamer</span><span style="font-size: 10px;">&nbsp;</span></h6>
-						<p><img style="border: 1px solid black; float: left; margin-left: 5px; margin-right: 5px;" src="/IMAGES%2f2013%2f03%2fconey.png.jpgx" alt="Keith Murphy Gamer" />I've played games my entire life. &nbsp;My father taught me chess before I went to kindergarten. &nbsp;I have&nbsp;<em><strong>my</strong>&nbsp;</em>version of rummy. &nbsp;I love video games, especially unique and challenging ones. &nbsp;I would love to be in the video game business. &nbsp;Perhaps by using some of my skills highlighted above.</p>
-						<p>Can you help me make that happen? &nbsp;Contact me at <strong><a href="mailto:keith@murfbard.com">keith@murfbard.com</a></strong>.</p>
-						<p style="clear: both;">&nbsp;</p>
-						<p>&nbsp;</p>
 					</div>
-					<div id="admin"><a href="/admin/Pages/EditPage.aspx?id=e3ad2f40-ed35-4357-85f8-41b5a3a098cb">Edit</a> | <a href="javascript:void(0);" onclick="if (confirm('Are you sure you want to delete the page?')) location.href='?deletepage=e3ad2f40-ed35-4357-85f8-41b5a3a098cb'">Delete</a></div>
+					<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
 				</div>
 				<p id="footer">
 					Keith Murphy -- <a href="mailto:keith@murfbard.com">keith@murfbard.com</a> -- MurfBard.com 2013 --<a href="https://twitter.com/murfbard" target="_blank"><img src="http://www.murfbard.com/images/twitter.png" style="height:22px; vertical-align:middle; margin:0px 6px;" /></a>
