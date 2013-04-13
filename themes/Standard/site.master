@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="StandardSite" %>
+<%@ Import Namespace="BlogEngine.Core" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head runat="server" profile="http://gmpg.org/xfn/11">
+    <link rel="shortcut icon" href="~/pics/blogengine.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="style-min.css" type="text/css" />
+</head>
+<body>
+  <form runat="Server" class="body">
+    
+  <div id="header">
+    <div style="float:left;">
+        <blog:WidgetZone ID="WidgetZoneHeader" runat="server" ZoneName="header_WIDGET_ZONE" />
+    </div>
+    <p><a href="<%=Utils.AbsoluteWebRoot %>"><%=BlogSettings.Instance.Name %></a></p>
+    <span><%=BlogSettings.Instance.Description %></span>
+  </div>
+  
+  <div id="menu">
+    
+    <div class="login">
+         <span runat="server" id="aUser"></span><a runat="server" id="aLogin" />
+    </div>
+   
+    <ul>
+      <li><a href="<%=Utils.AbsoluteWebRoot %>" rel="home"><%=Resources.labels.home %></a></li>
+      <li><a href="http://murfbard.com/?tag=">Blog</a></li>
+      <li><a href="/page/Voice-Acting-Demo">Voice Acting Demo</a></li>
+      <li><a href="<%=Utils.AbsoluteWebRoot %>archive<%= BlogEngine.Core.BlogConfig.FileExtension %>">Blog <%=Resources.labels.archive %></a></li>
+      <li style="display:none;"><a href="<%=Utils.AbsoluteWebRoot %>contact<%= BlogEngine.Core.BlogConfig.FileExtension %>"><%=Resources.labels.contact %></a></li>
+      <li><a href="<%=Utils.FeedUrl %>" class="feed"><img src="<%=Utils.ApplicationRelativeWebRoot %>pics/rssButton.png" width="12" height="12" alt="Feed" /><%=Resources.labels.subscribe %></a></li>
+      <% if (Utils.IsMobile)
+         { %>
+      <li><blog:MobileThemeSwitch runat="server" /></li>
+      <%
+         }
+      %>
+    </ul>
+  </div>
+  
+    <div id="content">
+      <blog:SearchOnSearch runat="server" MaxResults="3" Headline="You searched for" Text="Here are some results for the search term on this website" />
+      <asp:ContentPlaceHolder ID="cphBody" runat="server" />
+      
+      <p id="footer">
+        Keith Murphy -- <a href="mailto:keith@murfbard.com">keith@murfbard.com</a> -- MurfBard.com 2013 -- 
+          <a href="https://twitter.com/murfbard" target="_blank"><img src="http://www.murfbard.com/images/twitter.png" style="height:22px; vertical-align:middle; margin:0px 6px;" /></a>
+      </p>
+    </div>
+
+    <div id="sidepanel">
+      <blog:WidgetZone runat="server" ZoneName="be_WIDGET_ZONE" />
+    </div>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-39128813-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+</script>
+    
+  </form>
+  
+</body>
+</html>
